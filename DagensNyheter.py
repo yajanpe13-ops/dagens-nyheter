@@ -165,7 +165,7 @@ def remove_duplicates(articles):
 # 5. HÄMTA & FILTRERA ARTIKLAR
 # ==================================================
 articles = []
-one_week_ago = datetime.now() - timedelta(days=1)
+one_week_ago = datetime.now()
 
 for url in FEEDS:
     feed = feedparser.parse(url)
@@ -331,4 +331,5 @@ try:
     print("✅ Nytt mail skickat: Dagens nyheter")
 except Exception as e:
     print("❌ Misslyckades:", e)
+
 
