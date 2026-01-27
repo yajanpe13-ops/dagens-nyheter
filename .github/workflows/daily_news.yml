@@ -2,8 +2,7 @@ name: Skicka dagliga nyheter
 
 on:
   schedule:
-    # Kör varje dag kl 07:00 UTC (09:00 svensk tid)
-    - cron: "0 7 * * *"
+  - cron: "*/5 * * * *"
   workflow_dispatch:  # gör att du kan köra manuellt också
 
 jobs:
