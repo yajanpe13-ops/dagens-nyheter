@@ -2,30 +2,30 @@ name: Skicka dagliga nyheter
 
 on:
   schedule:
-  - cron: "*/5 * * * *"
-  workflow_dispatch:  # gör att du kan köra manuellt också
+    - cron: "*/5 * * * *"   # var 5:e minut (för test)
+  workflow_dispatch:        # gör att du kan köra manuellt också
 
 jobs:
   send_news:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checka ut koden
-      uses: actions/checkout@v3
+      - name: Checka ut koden
+        uses: actions/checkout@v3
 
-    - name: Installera Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.11
+      - name: Installera Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
 
-    - name: Installera dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install feedparser
+      - name: Installera dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install feedparser
 
-    - name: Kör nyheter-script
-      env:
-        EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
-        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-      run: |
-        python DagensNyheter.py
+      - name: Kör nyheter-script
+        env:
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: |
+          python DagensNyheter.py
