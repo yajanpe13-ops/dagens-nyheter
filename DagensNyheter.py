@@ -311,22 +311,19 @@ TO_ADDRESS = ["yajanpe13@gmail.com", "franziska.hauer2005@gmail.com"]
 
 msg = MIMEMultipart("alternative")
 
-# 🔑 Viktigt: unikt subject + message-id = nytt mail
 msg["Subject"] = "Dagens nyheter"
 msg["From"] = EMAIL_ADDRESS
-msg["To"] = TO_ADDRESS
+msg["To"] = ", ".join(TO_ADDRESS)  # ⚠️ Viktigt: konvertera listan till en kommaseparerad sträng
 msg["Message-ID"] = f"<{datetime.now().timestamp()}@dagensnyheter>"
 
 html = html_content.replace("\xa0", " ")  # använd HTML-strängen som redan finns i minnet
-
-
 msg.attach(MIMEText(html, "html", "utf-8"))
 
 try:
     server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
     server.starttls()
     server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-    server.sendmail(EMAIL_ADDRESS, TO_ADDRESS,msg.as_string())
+    server.sendmail(EMAIL_ADDRESS, TO_ADDRESS, msg.as_string())
     server.quit()
     print("✅ Nytt mail skickat: Dagens nyheter")
 except Exception as e:
