@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 7,19 * * *"  # Kör kl. 07:00 och 19:00 varje dag
+    - cron: "*/5 * * * *"   # var 2:e minut (UTC)
   workflow_dispatch:
 
 jobs:
