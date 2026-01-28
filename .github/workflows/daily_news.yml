@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "*/5 * * * *"   # var 2:e minut (UTC)
+    - cron: "*/1 * * * *"   # var 2:e minut (UTC)
   workflow_dispatch:
 
 jobs:
