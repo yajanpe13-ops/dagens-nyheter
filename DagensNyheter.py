@@ -307,7 +307,7 @@ SMTP_PORT = 587
 
 EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-TO_ADDRESS = "yajanpe13@gmail.com"
+TO_ADDRESS = ["yajanpe13@gmail.com", "franziska.hauer2005@gmail.com"]
 
 msg = MIMEMultipart("alternative")
 
@@ -331,6 +331,7 @@ try:
     print("✅ Nytt mail skickat: Dagens nyheter")
 except Exception as e:
     print("❌ Misslyckades:", e)
+
 
 
 
