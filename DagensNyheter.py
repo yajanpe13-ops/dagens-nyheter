@@ -326,11 +326,12 @@ try:
     server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
     server.starttls()
     server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-    server.sendmail(EMAIL_ADDRESS, TO_ADDRESS, msg.as_bytes())
+    server.sendmail(EMAIL_ADDRESS, TO_ADDRESS,msg.as_string())
     server.quit()
     print("✅ Nytt mail skickat: Dagens nyheter")
 except Exception as e:
     print("❌ Misslyckades:", e)
+
 
 
 
