@@ -311,10 +311,11 @@ TO_ADDRESS = ["yajanpe13@gmail.com", "franziska.hauer2005@gmail.com"]
 
 msg = MIMEMultipart("alternative")
 
-msg["Subject"] = "Dagens nyheter"
+msg["Subject"] = f"Dagens nyheter – {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 msg["From"] = EMAIL_ADDRESS
-msg["To"] = ", ".join(TO_ADDRESS)  # ⚠️ Viktigt: konvertera listan till en kommaseparerad sträng
+msg["To"] = ", ".join(TO_ADDRESS)
 msg["Message-ID"] = f"<{datetime.now().timestamp()}@dagensnyheter>"
+msg.add_header("X-Unique-ID", str(datetime.now().timestamp()))
 
 html = html_content.replace("\xa0", " ")  # använd HTML-strängen som redan finns i minnet
 msg.attach(MIMEText(html, "html", "utf-8"))
@@ -328,6 +329,7 @@ try:
     print("✅ Nytt mail skickat: Dagens nyheter")
 except Exception as e:
     print("❌ Misslyckades:", e)
+
 
 
 
