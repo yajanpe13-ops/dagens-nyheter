@@ -262,7 +262,7 @@ articles = remove_duplicates(articles)
 # ==================================================
 # 6. SORTERA & BEGRÄNSA (artikel en gång per kategori)
 # ==================================================
-MAX_PER_CATEGORY = 5
+MAX_PER_CATEGORY = 10
 final = {cat: [] for cat in KEYWORDS}
 assigned_articles = set()  # håller koll på vilka artiklar som redan används
 
@@ -361,6 +361,7 @@ try:
     print("✅ Nytt mail skickat: Dagens nyheter")
 except Exception as e:
     print("❌ Misslyckades:", e)
+
 
 
 
