@@ -19,61 +19,93 @@ FEEDS = [
     "https://www.affarsvarlden.se/rss",
     "https://www.svt.se/nyheter/inrikes/rss.xml",
     "https://www.dn.se/nyheter/utrikes/m/rss/",
-    "https://sverigesradio.se/rss/ekot/utrikes"
+    "https://sverigesradio.se/rss/ekot/utrikes",
+    "https://omni.se/rss/inrikes",
+    "https://omni.se/rss/utrikes",
+    "https://omni.se/rss/ekonomi",
 ]
 
 LOW_PRIORITY_SOURCES = ["aftonbladet", "expressen"]
 
 # ==================================================
-# 2. ÄMNEN (HÅRDA + MJUKA SIGNALER)
+# 2. ÄMNEN (HÅRDA + MJUKA SIGNALER – VIKTIGA NYHETER)
 # ==================================================
 KEYWORDS = {
     "Ekonomi": {
         "hard": {
-            "ränta": 4, "inflation": 4, "recession": 4,
-            "centralbank": 4, "konjunktur": 3
+            "styrränta": 5, "räntebesked": 5,
+            "inflation": 4, "recession": 5,
+            "finanskris": 5, "centralbank": 4,
+            "statsbudget": 4, "skattehöjning": 4
         },
         "soft": {
-            "bnp": 2, "börs": 2, "aktier": 1,
-            "arbetsmarknad": 2, "krona": 1
+            "bnp": 2, "börs": 2,
+            "arbetslöshet": 2,
+            "krona": 1
         }
     },
-    "Krig / Konflikt": {
+
+    "Krig / Säkerhet": {
         "hard": {
-            "krig": 4, "invasion": 4, "terror": 4,
-            "attack": 4, "bomb": 4, "missil": 4
+            "krig": 6, "invasion": 6,
+            "flyganfall": 6, "missilattack": 6,
+            "terrorattack": 6,
+            "mobilisering": 5,
+            "undantagstillstånd": 5,
+            "kärnvapen": 6
         },
         "soft": {
-            "militär": 2, "strider": 2,
-            "eskalering": 2, "säkerhet": 1
+            "militär": 2,
+            "frontlinje": 2,
+            "eskalering": 3,
+            "vapenvila": 2
         }
     },
-    "Politik": {
+
+    "Utrikes / Geopolitik": {
         "hard": {
-            "val": 4, "statsminister": 4,
-            "regering": 3, "misstroende": 4
+            "usa": 4, "kina": 4,
+            "ryssland": 5, "ukraina": 5,
+            "israel": 5, "iran": 5,
+            "nato": 5, "sanktioner": 5,
+            "eu-toppmöte": 4
         },
         "soft": {
-            "riksdag": 2, "minister": 2,
-            "lagförslag": 2, "utredning": 1
+            "utrikesminister": 2,
+            "fredssamtal": 2,
+            "allierade": 2,
+            "utrikespolitik": 2
         }
     },
-    "Kultur": {
+
+    "Politik / Stat": {
         "hard": {
-            "utställning": 4, "festival": 4, "konst": 3,
-            "teaterpremiär": 3, "boksläpp": 3, "musikrelease": 3
+            "regeringskris": 6,
+            "misstroende": 6,
+            "statsminister": 5,
+            "val": 5,
+            "undantagslag": 6,
+            "statskupp": 6
         },
         "soft": {
-            "film": 2, "teater": 2, "bok": 1,
-            "opera": 2, "konsert": 2, "kulturpolitik": 2
+            "riksdag": 2,
+            "minister": 2,
+            "utredning": 1
         }
     }
 }
 
+# ==================================================
+# HÅRDA NYHETSORD (ALLTID VIKTIGT)
+# ==================================================
 HARD_NEWS_WORDS = [
-    "ränta", "inflation", "krig", "invasion",
-    "terror", "val", "regering", "statsminister",
-    "centralbank"
+    "krig", "invasion", "terrorattack",
+    "flyganfall", "missil",
+    "kärnvapen", "mobilisering",
+    "undantagstillstånd",
+    "sanktioner", "nato",
+    "styrränta", "räntebesked",
+    "regeringskris", "statskupp"
 ]
 
 # ==================================================
@@ -329,6 +361,7 @@ try:
     print("✅ Nytt mail skickat: Dagens nyheter")
 except Exception as e:
     print("❌ Misslyckades:", e)
+
 
 
 
