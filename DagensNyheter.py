@@ -103,11 +103,25 @@ def clean_text(raw, max_len=600):
     return txt[:max_len] + ("..." if len(txt) > max_len else "")
 
 def extract_image(entry):
+    # 1. media_content / media_thumbnail
     for key in ["media_content", "media_thumbnail"]:
         if key in entry:
             for m in entry[key]:
                 if "url" in m:
                     return m["url"]
+
+    # 2. enclosures
+    if "enclosures" in entry:
+        for e in entry.enclosures:
+            if "image" in e.get("type", ""):
+                return e.get("href", "")
+
+    # 3. Sök i summary/content HTML
+    html_block = entry.get("summary", "") + " " + " ".join(c.get("value","") for c in entry.get("content", []))
+    match = re.search(r'<img[^>]+src="([^"]+)"', html_block)
+    if match:
+        return match.group(1)
+
     return ""
 
 def importance_score(text):
@@ -238,3 +252,4 @@ server.sendmail(EMAIL_ADDRESS, TO_ADDRESS, msg.as_string())
 server.quit()
 
 print("✅ Mail skickat med viktiga nyheter")
+
